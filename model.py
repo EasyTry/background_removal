@@ -26,7 +26,7 @@ class BackgroundRemoval:
         point_rend.add_pointrend_config(cfg)
         # Load a config from file
         current_dir = os.path.dirname(os.path.realpath(__file__))
-        config_file = os.path.join(current_dir, "pointrend_rcnn_R_50_FPN_3x_coco.yaml")
+        config_file = os.path.join(current_dir, "configs/pointrend_rcnn_R_50_FPN_3x_coco.yaml")
         cfg.merge_from_file(config_file)
         cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.5  # set threshold for this model
         # Use a model from PointRend model zoo: https://github.com/facebookresearch/detectron2/tree/master/projects/PointRend#pretrained-models
