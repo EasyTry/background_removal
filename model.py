@@ -6,6 +6,7 @@ from detectron2.utils.logger import setup_logger
 setup_logger()
 
 # import some common libraries
+import io
 import numpy as np
 import os
 
@@ -33,7 +34,8 @@ class BackgroundRemoval:
         cfg.MODEL.WEIGHTS = "detectron2://PointRend/InstanceSegmentation/pointrend_rcnn_R_50_FPN_3x_coco/164955410/model_final_edd263.pkl"
         self.predictor = DefaultPredictor(cfg)
         
-    def __call__(self, image):
+    def __call__(self, data):
+      image = np.load(io.BytesIO(data))
       outputs = self.predictor(image)
       mask = outputs["instances"].to("cpu").get('pred_masks')[0, :].numpy()
       return mask
